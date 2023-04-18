@@ -21,7 +21,9 @@ function send_result(geetest_challenge, geetest_validate) {
             if (data != null && data.retcode == 0) {
                 button.textContent = "验证通过，正在跳转";
                 button.classList.toggle('success');
-                setTimeout((window.location.href='../sms?uid='+uid), 3000);
+                setTimeout(function () {
+                    window.location.href = '../sms?uid=' + uid
+                }, 3000);
             } else {
                 button.classList.toggle('error');
                 button.textContent = "数据上传失败";
@@ -35,24 +37,27 @@ function send_result(geetest_challenge, geetest_validate) {
 
 function main() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.starrycraft.cn/mihoyo/status");
+    xhr.open("GET", "https://api.starrycraft.cn/mihoyo/get?uid=" + uid);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var data = null
             if (xhr.responseText) {
                 data = JSON.parse(xhr.responseText);
             }
-            if (data != null && data.retcode == 0) {
-                if (isNullOrEmpty(gt) || isNullOrEmpty(challenge) || isNullOrEmpty(uid)) {
-                    button.classList.toggle('error');
-                    button.textContent = "缺少必要参数";
-                } else {
-                    button.textContent = "正在加载人机验证";
-                    captcha()
-                }
-            } else {
+            if (data != null && data.retcode == 100) {
+                var gt = data.data.gt
+                var challenge = data.data.challenge
+                button.textContent = "正在加载人机验证";
+                captcha(gt, challenge)
+            } else if (data != null && data.retcode > 100) {
+                button.classList.toggle('success');
+                button.textContent = "已提交人机验证";
+                setTimeout(function () {
+                    window.location.href = '../sms?uid=' + uid
+                }, 3000);
+            } else if (data != null && (data.retcode == 401 || data.retcode == -1)) {
                 button.classList.toggle('error');
-                button.textContent = "数据回传错误";
+                button.textContent = "缺少必要参数";
             }
         } else if (xhr.readyState === 4 && xhr.status != 200) {
             button.classList.toggle('error');
@@ -62,10 +67,10 @@ function main() {
     xhr.send();
 }
 
-function captcha() {
+function captcha(gt, challenge) {
     initGeetest({
-        gt: getParam("gt"),
-        challenge: getParam("challenge"),
+        gt: gt,
+        challenge: challenge,
         offline: false,
         new_captcha: true,
         hideClose: true,
@@ -94,8 +99,8 @@ function captcha() {
     });
 }
 
-const gt = getParam("gt");
-const challenge = getParam("challenge");
+// const gt = getParam("gt");
+// const challenge = getParam("challenge");
 const uid = getParam("uid");
 const button = document.getElementById("button");
 main();

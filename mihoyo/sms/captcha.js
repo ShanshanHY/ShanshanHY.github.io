@@ -38,33 +38,31 @@ function upload() {
 
 function main() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://api.starrycraft.cn/mihoyo/status", false);
+    xhr.open("GET", "https://api.starrycraft.cn/mihoyo/get?uid=" + uid);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var data = null
             if (xhr.responseText) {
                 data = JSON.parse(xhr.responseText);
             }
-            if (data != null && data.retcode == 0) {
-                if (isNullOrEmpty(uid)) {
-                    button.classList.toggle('error');
-                    button.textContent = "缺少必要参数";
-                } else {
-                    button.textContent = "提交验证码";
-                    button.addEventListener('click', function () {
-                        upload()
-                    });
-                    sms_input.addEventListener("input", function () {
-                        if (sms_input.value.length === 6) {
-                            button.classList.toggle('ready');
-                        } else {
-                            button.classList.remove('ready')
-                        }
-                    });
-                }
-            } else {
+            if (data != null && data.retcode == 101) {
+                button.textContent = "提交验证码";
+                button.addEventListener('click', function () {
+                    upload()
+                });
+                sms_input.addEventListener("input", function () {
+                    if (sms_input.value.length === 6) {
+                        button.classList.toggle('ready');
+                    } else {
+                        button.classList.remove('ready')
+                    }
+                });
+            } else if (data != null && data.retcode > 101) {
+                button.classList.toggle('success');
+                button.textContent = "已提交短信验证码";
+            } else if (data != null && (data.retcode == 401 || data.retcode == -1)) {
                 button.classList.toggle('error');
-                button.textContent = "数据回传错误";
+                button.textContent = "缺少必要参数";
             }
         } else if (xhr.readyState === 4 && xhr.status != 200) {
             button.classList.toggle('error');
