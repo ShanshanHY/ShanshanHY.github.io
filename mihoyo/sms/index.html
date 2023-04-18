@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ghitori! Captcha</title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <link rel="stylesheet" href="../font.woff2">
+  <script src="https://static.geetest.com/static/js/gt.0.4.9.js"></script>
+</head>
+
+<body>
+  <div class="panel">
+    <div class="title">Ghitori! Captcha</div>
+    <input type="text" id="sms_code" class="sms_code style_base" oninput="only_num()" maxlength="6" placeholder="短信验证码"></input>
+    <button class="button style_base" id="button">正在连接后端</button>
+    <script src="captcha.js"></script>
+    <div class="description">
+      一个配合
+      <a class="description_url" href="https://github.com/ShanshanHY/MihoyoBBSTools-S">MihoyoBBSTools-S </a>
+      完成登陆验证的网站
+    </div>
+  </div>
+</body>
+
+</html>

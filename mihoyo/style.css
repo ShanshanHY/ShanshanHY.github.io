@@ -1,16 +1,17 @@
 @font-face {
     font-family: 'genshinfont';
-    src: url('../font.woff2') format('woff2');
+    src: url('font.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
 body {
-    background-image: url('../background.jpg');
+    background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -19,9 +20,41 @@ body {
     align-items: center;
 }
 
+
+.style_base {
+    font-family: 'genshinfont', sans-serif;
+    width: 18rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding-top: 10px;
+    padding-right: 50px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 2rem;
+    line-height: 1.8rem;
+    margin-bottom: 3rem;
+    transition: all 0.3s ease;
+}
+
 .panel {
     width: 90%;
     max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -47,6 +80,24 @@ body {
     background-color: rgba(250, 210, 194, 0.5);
 }
 
+.sms_code {
+    border-color: rgb(253, 213, 190);
+    background-color: rgba(253, 213, 190, 0.5);
+    outline: none;
+    margin-bottom: 0rem;
+}
+
+.sms_code:focus {
+    border-color: rgb(252, 187, 150);
+    background-color: rgba(252, 187, 150, 0.5);
+}
+
+.sms_code:hover {
+    border-color: rgb(252, 187, 150);
+    background-color: rgba(252, 187, 150, 0.5);
+    transform: scale(1.1)
+}
+
 .title {
     font-family: 'genshinfont', sans-serif;
     text-align: center;
@@ -58,83 +109,41 @@ body {
 
 .button {
     cursor: auto;
-    font-family: 'genshinfont', sans-serif;
-    width: 18rem;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding-top: 10px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-    padding-left: 50px;
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-    border-top-color: rgb(168, 111, 96);
-    border-right-color: rgb(168, 111, 96);
-    border-bottom-color: rgb(168, 111, 96);
-    border-left-color: rgb(168, 111, 96);
-    text-align: center;
-    background-color: rgba(168, 111, 96, 0.5);
-    font-size: 1rem;
-    margin-top: 3rem;
-    line-height: 1.8rem;
-    margin-bottom: 3rem;
     pointer-events: none;
-    transition: all 0.3s ease;
+    border-color: rgb(168, 111, 96);
+    background-color: rgba(168, 111, 96, 0.5);
 }
 
 .button.ready {
     cursor: pointer;
-    border-top-color: rgb(253, 213, 190);
-    border-right-color: rgb(253, 213, 190);
-    border-bottom-color: rgb(253, 213, 190);
-    border-left-color: rgb(253, 213, 190);
+    border-color: rgb(253, 213, 190);
     background-color: rgba(253, 213, 190, 0.5);
     pointer-events: auto;
 }
 
 .button.ready:hover {
-    border-top-color: rgb(252, 187, 150);
-    border-right-color: rgb(252, 187, 150);
-    border-bottom-color: rgb(252, 187, 150);
-    border-left-color: rgb(252, 187, 150);
+    border-color: rgb(252, 187, 150);
     background-color: rgba(252, 187, 150, 0.5);
     transform: scale(1.1)
 }
 
 .button.success {
     cursor: auto;
-    border-top-color: rgb(170, 255, 200);
-    border-right-color: rgb(170, 255, 200);
-    border-bottom-color: rgb(170, 255, 200);
-    border-left-color: rgb(170, 255, 200);
+    border-color: rgb(170, 255, 200);
     background-color: rgba(170, 255, 200, 0.5);
     pointer-events: none;
 }
 
 .button.upload {
     cursor: auto;
-    border-top-color: rgb(221, 253, 232);
-    border-right-color: rgb(221, 253, 232);
-    border-bottom-color: rgb(221, 253, 232);
-    border-left-color: rgb(221, 253, 232);
+    border-color: rgb(221, 253, 232);
     background-color: rgba(221, 253, 232, 0.5);
     pointer-events: none;
 }
 
 .button.error {
     cursor: auto;
-    border-top-color: rgb(255, 160, 150);
-    border-right-color: rgb(255, 160, 150);
-    border-bottom-color: rgb(255, 160, 150);
-    border-left-color: rgb(255, 160, 150);
+    border-color: rgb(255, 160, 150);
     background-color: rgba(255, 160, 150, 0.5);
     pointer-events: none;
 }
@@ -149,4 +158,34 @@ body {
     font-family: 'genshinfont', sans-serif;
     text-align: center;
     color: rgb(130, 0, 0);
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-10px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
